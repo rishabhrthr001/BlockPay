@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema(
       enum: ["employee", "hr", "admin"],
       default: "employee",
     },
+    salary: { type: Number, default: 0 },
+    rewards: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

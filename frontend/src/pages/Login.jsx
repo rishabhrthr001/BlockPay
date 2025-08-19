@@ -20,10 +20,14 @@ const Login = () => {
       });
       toast.success("Login Successful:", response.data);
       const userName = response.data.user?.name;
-      console.log(userName);
-      login(userName);
+      const role = response.data.user?.role;
+      login(userName, role);
       const token = response.data.token;
-      navigate("/");
+      if (role === "admin") {
+        navigate("/admin-dashboard");
+      } else {
+        navigate("/dashboard");
+      }
       return token;
     } catch (err) {
       toast.error("login failed", err.response?.data || err.message);

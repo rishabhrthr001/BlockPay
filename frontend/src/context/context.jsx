@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 const AuthContext = createContext({
   isAuthenticated: false,
   userName: null,
+  role: null,
   login: () => {},
   logout: () => {},
 });
@@ -11,10 +12,12 @@ const AuthContext = createContext({
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState(null);
-  const login = (name) => {
-    if (name) {
+  const [role, setRole] = useState(null);
+  const login = (name, role) => {
+    if ((name, role)) {
       setIsAuthenticated(true);
       setUserName(name);
+      setRole(role);
     }
   };
 
@@ -27,6 +30,7 @@ export const AuthProvider = ({ children }) => {
   const value = {
     isAuthenticated,
     userName,
+    role,
     login,
     logout,
   };
