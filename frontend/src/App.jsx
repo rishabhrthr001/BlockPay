@@ -7,7 +7,7 @@ import Signup from "./pages/signup";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./context/context.jsx";
 import DashBoard from "./components/DashBoard.jsx";
-import AdminDashboard from "./components/adminDashboard.jsx";
+import AdminDashboard from "./adminComponents/AdminDashboard.jsx";
 import ProtectedRoute from "./ProtectedRoutes/ProtectAdmin.jsx";
 import { WagmiProvider } from "wagmi";
 import { config } from "../wagmiClient.js";

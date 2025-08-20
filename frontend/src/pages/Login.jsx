@@ -21,8 +21,9 @@ const Login = () => {
       toast.success("Login Successful:", response.data);
       const userName = response.data.user?.name;
       const role = response.data.user?.role;
-      login(userName, role);
       const token = response.data.token;
+      const salary = response.data.user?.salary;
+      login(userName, role, token, salary);
       if (role === "admin") {
         navigate("/admin-dashboard");
       } else {

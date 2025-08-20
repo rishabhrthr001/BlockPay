@@ -5,6 +5,8 @@ const AuthContext = createContext({
   isAuthenticated: false,
   userName: null,
   role: null,
+  token: null,
+  salary: 0,
   login: () => {},
   logout: () => {},
 });
@@ -13,17 +15,23 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState(null);
   const [role, setRole] = useState(null);
-  const login = (name, role) => {
-    if ((name, role)) {
+  const [token, setToken] = useState(null);
+  const [salary, setSalary] = useState(0);
+  const login = (name, role, token, salary) => {
+    if ((name, role, token)) {
       setIsAuthenticated(true);
       setUserName(name);
       setRole(role);
+      setToken(token);
+      setSalary(salary);
     }
   };
 
   const logout = () => {
     setIsAuthenticated(false);
     setUserName(null);
+    setToken(null);
+    setSalary(null);
     toast.success("logged out");
   };
 
@@ -31,6 +39,8 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated,
     userName,
     role,
+    token,
+    salary,
     login,
     logout,
   };
