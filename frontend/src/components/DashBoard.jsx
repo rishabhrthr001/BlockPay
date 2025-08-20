@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAccount, useConnect } from "wagmi";
 import { Account } from "../WalletConnectComponents/Account";
 import YearProgress from "./YearProgress";
 import Salary from "./Salary";
-import { useEffect } from "react";
 import { useAuth } from "../context/context";
 import toast from "react-hot-toast";
 import axios from "axios";
+import RewardsLeft from "./RewardsLeft";
 
 function ConnectWallet() {
   const { address, isConnected } = useAccount();
@@ -18,7 +18,7 @@ function ConnectWallet() {
     const saveWallet = async () => {
       if (isConnected && address) {
         try {
-          axios.post(
+          await axios.post(
             "http://localhost:3000/api/set-address",
             { walletAddress: address },
             {
@@ -27,9 +27,9 @@ function ConnectWallet() {
               },
             }
           );
-          toast.success("wallet address saved");
+          toast.success("Wallet address saved");
         } catch (err) {
-          toast.error("failed to save wallet address", err);
+          toast.error("Failed to save wallet address", err);
         }
       }
     };
@@ -78,15 +78,10 @@ export default function DashBoard() {
           <YearProgress />
         </div>
 
-        <div className="pr-4 flex-1 flex justify-end">
+        <div className="pr-4 flex-1 flex flex-col items-end gap-6">
           <Salary />
+          <RewardsLeft />
         </div>
-      </div>
-
-      <div className="mt-10 flex justify-center">
-        <button className="px-8 py-4 rounded-xl bg-black text-white font-semibold text-lg hover:bg-neutral-700 transition shadow-lg">
-          Withdraw Bonus 🎁
-        </button>
       </div>
     </div>
   );

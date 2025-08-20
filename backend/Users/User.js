@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema(
     },
     salary: { type: Number, default: 0 },
     walletAddress: { type: String, default: null },
-    rewards: { type: Number, default: 0 },
+    rewards: { type: Number },
   },
   { timestamps: true }
 );
