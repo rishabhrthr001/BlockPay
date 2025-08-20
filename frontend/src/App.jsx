@@ -13,6 +13,7 @@ import { WagmiProvider } from "wagmi";
 import { config } from "../wagmiClient.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ProtectLogin from "./ProtectedRoutes/ProtectLogin.jsx";
+import SetSalary from "./adminComponents/SetSalary.jsx";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,14 @@ function App() {
                 element={
                   <ProtectedRoute allowedRoles={["admin"]}>
                     <AdminDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/set-salary"
+                element={
+                  <ProtectedRoute allowedRoles={["admin"]}>
+                    <SetSalary />{" "}
                   </ProtectedRoute>
                 }
               />

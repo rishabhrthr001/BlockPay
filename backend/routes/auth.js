@@ -58,6 +58,7 @@ router.post("/login", async (req, res) => {
         email: user.email,
         role: user.role,
         salary: user.salary,
+        joinDate: user.createdAt,
       },
     });
   } catch (err) {

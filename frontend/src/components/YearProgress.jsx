@@ -1,10 +1,14 @@
 import React from "react";
+import { useAuth } from "../context/context";
 
 const YearProgress = () => {
   const today = new Date();
   const startOfYear = new Date(today.getFullYear(), 0, 1);
   const endOfYear = new Date(today.getFullYear(), 11, 31);
   const progress = ((today - startOfYear) / (endOfYear - startOfYear)) * 100;
+
+  const { joinDate } = useAuth();
+  const join = joinDate ? new Date(joinDate) : null;
 
   const months = [
     "Jan",
@@ -21,23 +25,7 @@ const YearProgress = () => {
     "Dec",
   ];
 
-  const amounts = [
-    "$100",
-    "$200",
-    "$150",
-    "$300",
-    "$250",
-    "$400",
-    "$350",
-    "$500",
-    "$450",
-    "$600",
-    "$550",
-    "$700",
-  ];
-
   const reversedMonths = [...months].reverse();
-  const reversedAmounts = [...amounts].reverse();
 
   return (
     <div className="w-full max-w-5xl mx-auto p-6 flex">
@@ -57,11 +45,40 @@ const YearProgress = () => {
       </div>
 
       <div className="flex flex-col justify-between ml-6">
-        {reversedAmounts.map((amt, i) => (
-          <div key={i} className="px-4 py-1 text-xs text-white/90 rounded">
-            {amt}
-          </div>
-        ))}
+        {reversedMonths.map((month, i) => {
+          const monthIndex = 11 - i;
+          const year = today.getFullYear();
+          const monthStart = new Date(year, monthIndex, 1);
+          const monthEnd = new Date(year, monthIndex + 1, 0);
+          const totalDays = monthEnd.getDate();
+
+          let bonusText = "–";
+
+          if (join) {
+            if (monthStart < new Date(join.getFullYear(), join.getMonth(), 1)) {
+              bonusText = "–";
+            } else if (
+              join.getFullYear() === year &&
+              join.getMonth() === monthIndex
+            ) {
+              const daysWorked = (monthEnd - join) / (1000 * 60 * 60 * 24) + 1;
+              const prorated = ((daysWorked / totalDays) * 100).toFixed(1);
+              bonusText = `${prorated} EMP`;
+            } else {
+              bonusText = "100 EMP";
+            }
+          }
+
+          return (
+            <div
+              key={i}
+              className="px-4 py-1 text-xs text-white/90 rounded text-center"
+              style={{ minWidth: "60px" }}
+            >
+              {bonusText}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

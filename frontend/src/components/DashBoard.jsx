@@ -3,11 +3,38 @@ import { useAccount, useConnect } from "wagmi";
 import { Account } from "../WalletConnectComponents/Account";
 import YearProgress from "./YearProgress";
 import Salary from "./Salary";
+import { useEffect } from "react";
+import { useAuth } from "../context/context";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 function ConnectWallet() {
-  const { isConnected } = useAccount();
+  const { address, isConnected } = useAccount();
   const { connectors, connect } = useConnect();
   const [showOptions, setShowOptions] = useState(false);
+  const { token } = useAuth();
+
+  useEffect(() => {
+    const saveWallet = async () => {
+      if (isConnected && address) {
+        try {
+          axios.post(
+            "http://localhost:3000/api/set-address",
+            { walletAddress: address },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          toast.success("wallet address saved");
+        } catch (err) {
+          toast.error("failed to save wallet address", err);
+        }
+      }
+    };
+    saveWallet();
+  }, [isConnected, address, token]);
 
   if (isConnected) return <Account />;
 

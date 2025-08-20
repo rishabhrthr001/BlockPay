@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema(
       default: "employee",
     },
     salary: { type: Number, default: 0 },
+    walletAddress: { type: String, default: null },
     rewards: { type: Number, default: 0 },
   },
   { timestamps: true }

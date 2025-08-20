@@ -23,7 +23,8 @@ const Login = () => {
       const role = response.data.user?.role;
       const token = response.data.token;
       const salary = response.data.user?.salary;
-      login(userName, role, token, salary);
+      const joinDate = response.data.user?.joinDate;
+      login(userName, role, token, salary, joinDate);
       if (role === "admin") {
         navigate("/admin-dashboard");
       } else {
