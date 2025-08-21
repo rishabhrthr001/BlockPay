@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import User from "../Users/User.js";
 
-// Verify JWT
 export const verifyToken = async (req, res, next) => {
   const authHeader = req.headers["authorization"];
   if (!authHeader)
@@ -15,14 +14,13 @@ export const verifyToken = async (req, res, next) => {
     const user = await User.findById(decoded.id);
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    req.user = user; // attach user info
+    req.user = user;
     next();
   } catch (err) {
     return res.status(403).json({ message: "Invalid token" });
   }
 };
 
-// Role-based authorization
 export const authorizeRole = (roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {

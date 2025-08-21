@@ -56,4 +56,21 @@ router.post("/withdraw", verifyToken, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+router.get("/recent-tx", verifyToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId).select("transactions");
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json(user.transactions.reverse());
+  } catch (err) {
+    console.error("Error fetching transactions:", err);
+    res.status(500).json({ error: "Failed to fetch transactions" });
+  }
+});
+
 export default router;

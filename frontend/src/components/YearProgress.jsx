@@ -48,7 +48,7 @@ const YearProgress = () => {
       </div>
 
       <p className="text-white/80 text-sm mt-6">
-        🎉 You’ll receive <span className="font-semibold">1000 EMP coins</span>{" "}
+        🎉 You’ll receive <span className="font-semibold">1000 Golu coins</span>{" "}
         on Jan 1, {nextYear}
       </p>
     </div>

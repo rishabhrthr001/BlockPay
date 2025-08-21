@@ -11,13 +11,12 @@ export const WithdrawLogic = async (amount, token, userAddress) => {
       { amount },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log("DB updated:", dbResponse.data);
 
     const txResponse = await axios.post(
       "http://localhost:3000/freebies/send-reward",
-      { userAddress, amount }
+      { userAddress, amount },
+      { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log("Tokens sent:", txResponse.data);
 
     return {
       db: dbResponse.data,
