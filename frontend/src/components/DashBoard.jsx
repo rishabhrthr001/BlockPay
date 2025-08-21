@@ -39,18 +39,20 @@ function ConnectWallet() {
   if (isConnected) return <Account />;
 
   return (
-    <div className="relative">
-      <button
-        onClick={() => setShowOptions(!showOptions)}
-        className="px-4 py-2 rounded-lg bg-black text-white hover:bg-neutral-700 transition"
-      >
+    <div
+      className="relative"
+      onMouseEnter={() => setShowOptions(true)}
+      onMouseLeave={() => setShowOptions(false)}
+    >
+      <button className="px-4 py-2 rounded-lg bg-black text-white hover:bg-neutral-700 transition">
         Connect Wallet
       </button>
+
       {showOptions && (
         <div className="absolute right-0 mt-2 w-48 bg-black border border-neutral-700 rounded-lg shadow-lg">
           {connectors.map((connector) => (
             <button
-              key={connector.uid}
+              key={connector.id || connector.name}
               onClick={() => connect({ connector })}
               className="w-full text-left px-4 py-2 text-white hover:bg-neutral-700 transition"
             >

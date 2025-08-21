@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useAccount } from "wagmi";
 
 const WithdrawModal = ({ isOpen, onClose, maxTokens, setBonus }) => {
+  const { address } = useAccount();
   const { token } = useAuth();
   const [amount, setAmount] = useState("");
 
@@ -24,8 +25,8 @@ const WithdrawModal = ({ isOpen, onClose, maxTokens, setBonus }) => {
     }
 
     try {
-      const result = await WithdrawLogic(withdrawAmount, token);
-      toast.success("Withdraw successful!", result);
+      const result = await WithdrawLogic(withdrawAmount, token, address);
+      toast.success(`Withdraw successful! Your tx hash is ${result.tx.txHash}`);
 
       setBonus((prev) => prev - withdrawAmount);
 
@@ -118,8 +119,8 @@ const RewardsLeft = () => {
   return (
     <>
       <div className="bg-black rounded-3xl w-[40rem] h-[20rem] p-10 text-white shadow-xl transform transition-transform duration-300 hover:-translate-y-3 hover:scale-105">
-        <div className="text-3xl font-semibold">EMP Coins Bonus</div>
-        <div className="mt-6 text-5xl font-bold">{bonus} EMP</div>
+        <div className="text-3xl font-semibold">GOLU Coins Bonus</div>
+        <div className="mt-6 text-5xl font-bold">{bonus} G's</div>
         <div className="mt-8 flex justify-end">
           <button
             className="px-5 py-3 rounded-xl bg-white text-black font-semibold text-lg transition-transform duration-200 hover:scale-110 shadow-md"

@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import authRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/authRoutes.js";
 import walletRoutes from "./routes/walletRoutes.js";
+import sendRewards from "./contracts/sendReward.js";
 
 const app = express();
 dotenv.config();
@@ -13,6 +14,7 @@ app.use(cors());
 app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes);
 app.use("/api", walletRoutes);
+app.use("/freebies", sendRewards);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("connected to mongoDB"))
