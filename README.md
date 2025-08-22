@@ -167,7 +167,7 @@ DEPLOYED_ADDRESS=<your_deployed_contract_address>
 
 Frontend (.env)
 VITE_WALLET_CONNECT_PROJECT_ID=<your_wallet_connect_project_id>
-REACT_APP_API_URL=<your_backend_render_url>
+VITE_REACT_APP_API_URL=<your_backend_render_url>
 
 🚀 Running Locally
 Backend
@@ -196,3 +196,4 @@ Contributions are welcome! Feel free to fork the repo and submit a pull request.
 📜 License
 
 This project is licensed under the MIT License.
+
