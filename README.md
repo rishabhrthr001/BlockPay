@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 BlockPay
 
 BlockPay is a Web3-powered payroll system that allows admins to send salaries to employees in crypto. Employees not only get their regular salary but also enjoy yearly bonuses in Golu Coins 🎉.
@@ -98,6 +98,7 @@ Contributions are welcome! Feel free to fork the repo and submit a pull request.
 📜 License
 
 This project is licensed under the MIT License.
+
 
 =======
 BlockPay
@@ -195,4 +196,3 @@ Contributions are welcome! Feel free to fork the repo and submit a pull request.
 📜 License
 
 This project is licensed under the MIT License.
->>>>>>> 5930eb3 (case sensitive fix)
