@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import BASE_URL from "../utils/apiConfig";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      const response = axios.post("http://localhost:3000/auth/signup", {
+      const response = axios.post(`${BASE_URL}/auth/signup`, {
         name: name,
         email: email,
         password: password,

@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useAuth } from "../context/context.jsx";
+import BASE_URL from "../utils/apiConfig";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +15,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/auth/login", {
+      const response = await axios.post(`${BASE_URL}/auth/login`, {
         email: email,
         password: password,
       });

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../context/context";
 import { FiEdit } from "react-icons/fi";
+import BASE_URL from "../utils/apiConfig";
 
 const SetSalary = () => {
   const [employees, setEmployees] = useState([]);
@@ -15,14 +16,11 @@ const SetSalary = () => {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/admin/employees",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${BASE_URL}/admin/employees`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setEmployees(response.data);
       } catch (error) {
         console.error("Error fetching employees:", error);
@@ -40,7 +38,7 @@ const SetSalary = () => {
   const handleSaveClick = async (emp) => {
     try {
       await axios.post(
-        "http://localhost:3000/admin/set-salary",
+        `${BASE_URL}/admin/set-salary`,
         { userId: emp._id, salary: Number(editedSalary) },
         { headers: { Authorization: `Bearer ${token}` } }
       );

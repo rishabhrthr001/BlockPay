@@ -5,6 +5,7 @@ import { WithdrawLogic } from "./WithdrawLogic";
 import toast from "react-hot-toast";
 import { useAccount } from "wagmi";
 import { useNavigate } from "react-router-dom";
+import BASE_URL from "../utils/apiConfig";
 
 const WithdrawModal = ({ isOpen, onClose, maxTokens, setBonus }) => {
   const { address } = useAccount();
@@ -113,14 +114,11 @@ const RewardsLeft = () => {
   useEffect(() => {
     const fetchBonus = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/get-bonus",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${BASE_URL}/api/get-bonus`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setBonus(response.data.rewards);
       } catch (err) {
         console.error("Failed to get bonus:", err);

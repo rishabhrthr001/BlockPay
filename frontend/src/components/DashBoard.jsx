@@ -7,6 +7,7 @@ import { useAuth } from "../context/context";
 import toast from "react-hot-toast";
 import axios from "axios";
 import RewardsLeft from "./RewardsLeft";
+import BASE_URL from "../utils/apiConfig";
 
 function ConnectWallet() {
   const { address, isConnected } = useAccount();
@@ -19,7 +20,7 @@ function ConnectWallet() {
       if (isConnected && address) {
         try {
           await axios.post(
-            "http://localhost:3000/api/set-address",
+            `${BASE_URL}/api/set-address`,
             { walletAddress: address },
             {
               headers: {

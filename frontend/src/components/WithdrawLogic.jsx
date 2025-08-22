@@ -1,4 +1,5 @@
 import axios from "axios";
+import BASE_URL from "../utils/apiConfig";
 
 export const WithdrawLogic = async (amount, token, userAddress) => {
   if (!userAddress) {
@@ -7,13 +8,13 @@ export const WithdrawLogic = async (amount, token, userAddress) => {
 
   try {
     const dbResponse = await axios.post(
-      "http://localhost:3000/api/withdraw",
+      `${BASE_URL}/api/withdraw`,
       { amount },
       { headers: { Authorization: `Bearer ${token}` } }
     );
 
     const txResponse = await axios.post(
-      "http://localhost:3000/freebies/send-reward",
+      `${BASE_URL}/freebies/send-reward`,
       { userAddress, amount },
       { headers: { Authorization: `Bearer ${token}` } }
     );

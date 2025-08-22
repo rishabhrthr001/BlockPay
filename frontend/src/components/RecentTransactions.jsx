@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ExternalLink } from "lucide-react";
 import { useAuth } from "../context/context";
+import BASE_URL from "../utils/apiConfig";
 
 const RecentTransactions = () => {
   const { token } = useAuth();
@@ -12,7 +13,7 @@ const RecentTransactions = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/recent-tx", {
+        const res = await axios.get(`${BASE_URL}/api/recent-tx`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setTransactions(res.data);
