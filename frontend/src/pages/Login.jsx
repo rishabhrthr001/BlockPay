@@ -8,6 +8,7 @@ import BASE_URL from "../utils/apiConfig";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -15,6 +16,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const response = await axios.post(`${BASE_URL}/auth/login`, {
         email: email,
         password: password,
@@ -26,6 +28,7 @@ const Login = () => {
       const salary = response.data.user?.salary;
       const joinDate = response.data.user?.joinDate;
       login(userName, role, token, salary, joinDate);
+
       if (role === "admin") {
         navigate("/admin-dashboard");
       } else {
@@ -34,11 +37,20 @@ const Login = () => {
       return token;
     } catch (err) {
       toast.error("login failed", err.response?.data || err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-[#121212] text-white">
+    <div className="flex items-center justify-center h-screen bg-[#121212] text-white relative">
+      {/* Loader Overlay */}
+      {loading && (
+        <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-50">
+          <div className="w-16 h-16 border-4 border-t-white border-b-white border-l-gray-400 border-r-gray-400 rounded-full animate-spin"></div>
+        </div>
+      )}
+
       <div className="w-full max-w-md bg-[#1E1E1E] p-8 rounded-xl shadow-lg">
         <h2 className="text-2xl font-bold mb-6 text-center">
           Login to BlockPay
@@ -52,6 +64,7 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="p-3 rounded-lg bg-[#242424] text-white outline-none focus:ring-2 focus:ring-neutral-600"
+            disabled={loading}
           />
           <input
             type="password"
@@ -60,13 +73,15 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="p-3 rounded-lg bg-[#242424] text-white outline-none focus:ring-2 focus:ring-neutral-600"
+            disabled={loading}
           />
 
           <button
             type="submit"
             className="w-full py-3 rounded-lg bg-black hover:bg-neutral-700 transition"
+            disabled={loading}
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
