@@ -1,6 +1,6 @@
 const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? process.env.REACT_APP_API_URL // your Render backend
-    : "http://localhost:3000"; // your local backend
+  import.meta.env.MODE === "production"
+    ? import.meta.env.VITE_API_URL
+    : "http://localhost:3000";
 
 export default BASE_URL;
