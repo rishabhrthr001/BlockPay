@@ -42,13 +42,28 @@ const Salary = () => {
   );
 
   return (
-    <div className="bg-black rounded-3xl w-[40rem] h-[20rem] p-10 text-white shadow-xl transform transition-transform duration-300 hover:-translate-y-3 hover:scale-105">
-      <div className="text-3xl font-semibold">Salary</div>
-      <div className="mt-6 text-5xl font-bold">${displaySalary}</div>
-      <div className="mt-3 text-lg text-gray-400 break-words">
+    <div
+      className="
+        bg-black rounded-3xl 
+        w-full 
+        max-w-2xl 
+        p-6 sm:p-10 
+        text-white 
+        shadow-xl 
+        transform transition-transform duration-300 
+        hover:-translate-y-2 hover:scale-[1.02]
+      "
+    >
+      <div className="text-2xl sm:text-3xl font-semibold">Salary</div>
+
+      <div className="mt-6 text-4xl sm:text-5xl font-bold break-words">
+        ${displaySalary}
+      </div>
+
+      <div className="mt-4 text-base sm:text-lg text-gray-400 break-words leading-relaxed">
         Will be credited to your address:
         <br />
-        <span className="text-white font-semibold">{address}</span>
+        <span className="text-white font-semibold break-words">{address}</span>
         <br />
         {daysLeft} days left (on {formattedDate})
       </div>

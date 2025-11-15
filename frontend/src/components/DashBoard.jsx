@@ -30,7 +30,7 @@ function ConnectWallet() {
           );
           toast.success("Wallet address saved");
         } catch (err) {
-          toast.error("Failed to save wallet address", err);
+          toast.error("Failed to save wallet address");
         }
       }
     };
@@ -41,7 +41,7 @@ function ConnectWallet() {
 
   return (
     <div
-      className="relative"
+      className="relative inline-block"
       onMouseEnter={() => setShowOptions(true)}
       onMouseLeave={() => setShowOptions(false)}
     >
@@ -50,7 +50,7 @@ function ConnectWallet() {
       </button>
 
       {showOptions && (
-        <div className="absolute right-0 mt-2 w-48 bg-black border border-neutral-700 rounded-lg shadow-lg">
+        <div className="absolute right-0 mt-2 w-40 bg-black border border-neutral-700 rounded-lg shadow-lg z-20">
           {connectors.map((connector) => (
             <button
               key={connector.id || connector.name}
@@ -69,19 +69,32 @@ function ConnectWallet() {
 export default function DashBoard() {
   return (
     <div
-      className="min-h-screen text-white p-8"
+      className="min-h-screen text-white p-6 sm:p-8"
       style={{ backgroundColor: "#242424" }}
     >
+      {/* Connect Wallet Button */}
       <div className="flex justify-end mb-8">
         <ConnectWallet />
       </div>
 
-      <div className="mt-10 flex justify-between items-start gap-10 px-32">
-        <div className="pl-4 flex-1">
+      {/* Responsive Layout */}
+      <div
+        className="
+          mt-10 
+          flex flex-col lg:flex-row 
+          justify-between 
+          items-start 
+          gap-10 
+          w-full
+        "
+      >
+        {/* LEFT SIDE */}
+        <div className="flex-1 w-full">
           <YearProgress />
         </div>
 
-        <div className="pr-4 flex-1 flex flex-col items-end gap-6">
+        {/* RIGHT SIDE */}
+        <div className="flex-1 w-full flex flex-col gap-6 lg:items-end">
           <Salary />
           <RewardsLeft />
         </div>
